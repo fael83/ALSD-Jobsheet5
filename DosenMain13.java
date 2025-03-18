@@ -1,0 +1,67 @@
+import java.util.Scanner;
+
+public class DosenMain13 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        DataDosen13 data = new DataDosen13();
+        System.out.println("==Menu==");
+        System.out.println("1. Tambah data dosen");
+        System.out.println("2. Tampil data");
+        System.out.println("3. Mengurutkan data dosen dari yang termuda - tertua menggunakan BUBBLE SORT (ASC)");
+        System.out.println("4. Mengurutkan data dosen dari yang tertua - termuda menggunakan INSERTION SORT (DSC) ");
+
+        while (true) {
+        System.out.print("Pilih menu (0 untuk selesai):");
+        int menu = sc.nextInt();
+            if (menu == 1) {
+                System.out.print("Masukkan jumlah data:");
+                int jumlah = sc.nextInt();
+                Dosen13 [] dsn = new Dosen13[jumlah];
+                for (int i = 0; i < dsn.length; i++) {
+                    System.out.println("Masukkan data dosen ke " + (i +1) + ": ");
+                    System.out.print("Kode: ");
+                    String kode = sc.next();
+                    System.out.print("Nama: ");
+                    String nama = sc.next();
+                    System.out.print("Jenis Kelamin (L/P): ");
+                    String jk = sc.next();
+                    Boolean jenisKelamin;
+                    if (jk.equalsIgnoreCase("L")) {
+                        jenisKelamin = true;
+                    } else {
+                        jenisKelamin = false;
+                    }
+                    System.out.print("Masukkan usia: ");
+                    int usia = sc.nextInt();
+
+                    dsn [i] = new Dosen13(kode, nama, jenisKelamin, usia);
+                    data.tambah(dsn[i]);
+                }
+                System.out.println("======");
+            }
+            if (menu == 2) {
+                data.tampil();
+                System.out.println("======");
+            }
+            if (menu == 3) {
+                System.out.println("====usia ASC====");
+                data.sortingASC();
+                data.tampil();
+                System.out.println("======");
+            }
+            if (menu == 4) {
+                System.out.println("====usia DSC====");
+                data.sortingDSC();
+                data.tampil();
+                System.out.println("======");
+            }
+            if (menu == 0) {
+                System.out.println("Terima kasih");
+                break;
+            } if (menu > 4) {
+                System.out.println("Masukkan angkan 1-4");
+                System.out.println("==================");
+            } 
+        }
+    }
+}
