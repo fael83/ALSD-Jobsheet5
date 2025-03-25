@@ -1,6 +1,6 @@
 public class DataDosen13 {
     Dosen13 [] dataDosen = new Dosen13[10];
-    int idx;
+    int idx =0;
 
     void tambah(Dosen13 dsn){
         if (idx<dataDosen.length) {
@@ -50,5 +50,49 @@ public class DataDosen13 {
             }
             dataDosen[j-1] = temp;
         }
+    }
+    int pencarianDataSequential(String nama){
+        int data = 0;
+        for (int i = 0; i < idx; i++) {
+            if (dataDosen[i].nama.equalsIgnoreCase(nama)) {
+                dataDosen[i].tampilInformasi();
+                System.out.println("-----------------");
+                data++;
+            }
+        }
+        if (data > 1) {
+            System.out.println("Peringatan!"+
+                        " Ada lebih dari satu dosen dengan nama " + nama);
+        }
+        return data;
+    }
+    int pencarianDataBinary(int usia){
+        sortingASC();
+        int left = 0, right = idx -1;
+        int data = 0;
+        while (left<=right) {
+            int mid = (left+right)/2;
+            if (dataDosen[mid].usia == usia) {
+                for (int i = mid; i >= 0 && dataDosen[i].usia == usia; i--) {
+                    dataDosen[i].tampilInformasi();
+                    data++;
+                }
+                for (int i = mid+1; i < idx && dataDosen[i].usia == usia; i++) {
+                    System.out.println("-------------------");
+                    dataDosen[i].tampilInformasi();
+                    data++;
+                }
+                break;
+            } else if (dataDosen[mid].usia> usia){
+                right = mid -1;
+            } else {
+                left = mid +1;
+            }
+        }
+        if (data > 1) {
+            System.out.println("Peringatan!"+
+                        " Ada lebih dari satu dosen dengan usia " + usia);
+        }
+        return data;
     }
 }

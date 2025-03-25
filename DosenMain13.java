@@ -7,11 +7,15 @@ public class DosenMain13 {
         System.out.println("==Menu==");
         System.out.println("1. Tambah data dosen");
         System.out.println("2. Tampil data");
-        System.out.println("3. Mengurutkan data dosen dari yang termuda - tertua menggunakan BUBBLE SORT (ASC)");
-        System.out.println("4. Mengurutkan data dosen dari yang tertua - termuda menggunakan INSERTION SORT (DSC) ");
+        // System.out.println("3. Mengurutkan data dosen dari yang termuda - tertua menggunakan BUBBLE SORT (ASC)");
+        // System.out.println("4. Mengurutkan data dosen dari yang tertua - termuda menggunakan INSERTION SORT (DSC) ");
+        // System.out.println("3. Urutkan data berdasarkan usia (ASC)");
+        System.out.println("3. Cari dosen berdasarkan nama (Sequential Search)");
+        System.out.println("4. Cari dosen berdasarkan usia (Binary Search) ");
+        System.out.println("5. Keluar");
 
         while (true) {
-        System.out.print("Pilih menu (0 untuk selesai):");
+        System.out.print("Pilih menu :");
         int menu = sc.nextInt();
             if (menu == 1) {
                 System.out.print("Masukkan jumlah data:");
@@ -37,29 +41,31 @@ public class DosenMain13 {
                     dsn [i] = new Dosen13(kode, nama, jenisKelamin, usia);
                     data.tambah(dsn[i]);
                 }
-                System.out.println("======");
-            }
-            if (menu == 2) {
+                System.out.println("===================");
+            } else if (menu == 2) {
                 data.tampil();
-                System.out.println("======");
-            }
-            if (menu == 3) {
-                System.out.println("====usia ASC====");
-                data.sortingASC();
-                data.tampil();
-                System.out.println("======");
-            }
-            if (menu == 4) {
-                System.out.println("====usia DSC====");
-                data.sortingDSC();
-                data.tampil();
-                System.out.println("======");
-            }
-            if (menu == 0) {
+                System.out.println("===================");
+            } else if (menu == 3) {
+                System.out.print("Masukkan nama dosen yang dicari: ");
+                String cariNama=sc.next();
+                int hasil = data.pencarianDataSequential(cariNama);
+                if (hasil == 0) {
+                    System.out.println("Data tidak ditemukan");
+                }
+                System.out.println("=====================");
+            } else if (menu == 4) {
+                System.out.print("Masukkan usia dosen yang dicari: ");
+                int cariUsia=sc.nextInt();
+                int hasil = data.pencarianDataBinary(cariUsia);
+                if (hasil == 0) {
+                    System.out.println("Data tidak ditemukan");
+                }
+                System.out.println("=====================");
+            } else if (menu == 5) {
                 System.out.println("Terima kasih");
                 break;
-            } if (menu > 4) {
-                System.out.println("Masukkan angkan 1-4");
+            } if (menu < 1 && menu > 5) {
+                System.out.println("Masukkan angkan 1-5");
                 System.out.println("==================");
             } 
         }

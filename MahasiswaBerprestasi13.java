@@ -11,10 +11,10 @@ public class MahasiswaBerprestasi13 {
         }
     }
     void tampil(){
-        for (Mahasiswa13 m : listMhs) {
-            m.tampilInformasi();
+        for (int i = 0; i < idx; i++) {
+            listMhs[i].tampilInformasi();
             System.out.println("------------------------");
-        }
+            }
     }
     void bubbleSort(){
         for (int i = 0; i < listMhs.length-1; i++) {
@@ -50,5 +50,46 @@ public class MahasiswaBerprestasi13 {
             }
             listMhs[j]=temp;
         }
+    }
+    int sequentialSearching(double cari){
+        int posisi = -1;
+        for(int j =0; j<listMhs.length;j++){
+            if (listMhs[j].ipk == cari) {
+                posisi=j;
+                break;
+            }
+        }
+        return posisi;
+    }
+    void tampilPosisi(double x, int pos){
+        if (pos!=-1) {
+            System.out.println("Data mahasiswa dengan ipk :" +x+ " ditemukan pada indeks " + pos);
+        } else {
+            System.out.println("data " + x + " tidak ditemukan");
+        }
+    }
+    void tampilDataSearch(double x, int pos){
+        if (pos!=-1) {
+            System.out.println("nim\t :"+listMhs[pos].nim);
+            System.out.println("nama\t :" + listMhs[pos].nama);
+            System.out.println("kelas\t :" + listMhs[pos].kelas);
+            System.out.println("ipk\t :" + x);
+        } else {
+            System.out.println("Data mahasiswa dengan IPK " + x+ " tidak ditemukan");
+        }
+    }
+    int findBinariSearch(double cari, int left, int right){
+        int mid;
+        if (right>=left) {
+            mid = (left+right)/2;
+            if (cari == listMhs[mid].ipk) {
+                return(mid);
+            } else if (listMhs[mid].ipk>cari) {
+                return findBinariSearch(cari, mid+1, right);
+            } else {
+                return findBinariSearch(cari, left, mid-1);
+            }
+        }
+        return -1;
     }
 }
